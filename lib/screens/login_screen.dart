@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'home_screen.dart';
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 20),
-                  _buildLoginButton(),
+                  _buildLoginButton(context),
                 ],
               ),
             ),
@@ -93,15 +93,21 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildLoginButton() {
+  Widget _buildLoginButton(BuildContext context) {
   return Container(
-    width: double.infinity, // Để nút rộng hơn
-    height: 55, // Tăng chiều cao
-    margin: EdgeInsets.symmetric(horizontal: 20), // Thêm khoảng cách 2 bên
+    width: double.infinity,
+    height: 55,
+    margin: EdgeInsets.symmetric(horizontal: 20),
     child: ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        // Chuyển sang màn hình chính khi đăng nhập thành công
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+        );
+      },
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(vertical: 16), // Tăng chiều cao của nút
+        padding: EdgeInsets.symmetric(vertical: 16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
@@ -114,7 +120,7 @@ class LoginScreen extends StatelessWidget {
         ),
         child: Container(
           alignment: Alignment.center,
-          constraints: BoxConstraints(minWidth: 100, minHeight: 50), // Điều chỉnh kích thước
+          constraints: BoxConstraints(minWidth: 100, minHeight: 50),
           child: Text(
             'Đăng nhập',
             style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
