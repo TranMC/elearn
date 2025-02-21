@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/side_navigation.dart';
+import '../screens/profile_screen.dart'; // Import ProfileScreen
+import '../screens/settings_screen.dart'; // Import SettingsScreen
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -11,16 +13,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Danh sách các màn hình
   final List<Widget> _screens = [
-    HomeContent(),
-    Center(child: Text("👤 Profile Screen", style: TextStyle(fontSize: 24))),
-    Center(child: Text("⚙️ Settings Screen", style: TextStyle(fontSize: 24))),
+    HomeContent(key: ValueKey(0)), // Trang chính
+    ProfileScreen(), // Trang Hồ sơ
+    SettingsScreen(), // Trang Cài đặt
+    Center(child: Text("ℹ️ Về chúng tôi", style: TextStyle(fontSize: 24))),
   ];
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    Navigator.pop(context); // Đóng menu sau khi chọn
+    if (!mounted) return;
+    if (index < _screens.length) {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
   }
 
   void _logout() {
@@ -30,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("🟡 [BUILD] Hiển thị màn hình có index: $_selectedIndex");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -37,7 +43,9 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Row(
           children: [
             CircleAvatar(
-              backgroundImage: AssetImage('assets/images/avatar.png'), // Avatar user
+              backgroundImage: AssetImage(
+                'assets/images/avatar.png',
+              ), // Avatar user
             ),
             SizedBox(width: 10),
             Text(
@@ -46,23 +54,36 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.logout, color: Colors.black),
-            onPressed: _logout, // Gọi hàm logout
-          ),
-        ],
       ),
-      drawer: SideNavigation(onSelect: _onItemTapped), // Tích hợp Side Navigation
-      body: _screens[_selectedIndex],
+      drawer: SideNavigation(
+        onSelect: _onItemTapped,
+      ), // Tích hợp Side Navigation
+      body: IndexedStack(
+        index: _selectedIndex,
+        children:
+            _screens
+                .map(
+                  (screen) => Container(
+                    key: ValueKey(_screens.indexOf(screen)),
+                    child: screen,
+                  ),
+                )
+                .toList(),
+      ),
     );
   }
 }
 
 // Nội dung chính của trang Home
 class HomeContent extends StatelessWidget {
+  final Key? key;
+
+  HomeContent({this.key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    print(
+      "🟢 [HOME] HomeContent đang được build",
+    ); // Kiểm tra xem có hiển thị không
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -152,10 +173,7 @@ class HomeContent extends StatelessWidget {
         "title": "Flutter cho người mới",
         "image": "assets/images/flutter_course.jpg",
       },
-      {
-        "title": "Thiết kế UI/UX",
-        "image": "assets/images/uiux_course.jpg",
-      },
+      {"title": "Thiết kế UI/UX", "image": "assets/images/uiux_course.jpg"},
       {
         "title": "Kinh doanh Online",
         "image": "assets/images/business_course.jpg",
