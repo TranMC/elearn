@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:elearning_app/main.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -7,47 +6,68 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Hình nền
-          Positioned.fill(
-            child: Image.network(
-              'https://source.unsplash.com/800x600/?education,learning',
-              fit: BoxFit.cover,
-            ),
-          ),
-          // Lớp phủ làm mờ nền
-          Positioned.fill(
-            child: Container(
-              color: Colors.black.withOpacity(0.5),
+          // Gradient Background
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFF8E2DE2), Color(0xFF4A00E0)],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
             ),
           ),
           Center(
-            child: Padding(
+            child: Container(
+              width: 350,
               padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 10,
+                    spreadRadius: 2,
+                    offset: Offset(0, 5),
+                  ),
+                ],
+              ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
                 children: [
+                  // Ảnh trang trí
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image.asset(
+                      'assets/images/login_bg.jpg', // Đổi thành đường dẫn ảnh của bạn
+                      height: 150,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  SizedBox(height: 20),
                   Text(
-                    'Đăng Nhập',
+                    "Đăng nhập",
                     style: TextStyle(
-                      fontSize: 26,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black87,
                     ),
                   ),
-                  SizedBox(height: 20),
-                  _buildTextField(Icons.email, 'Email', false),
+                  SizedBox(height: 15),
+                  _buildTextField(Icons.person, "Tên đăng nhập"),
                   SizedBox(height: 10),
-                  _buildTextField(Icons.lock, 'Mật khẩu', true),
-                  SizedBox(height: 20),
-                  _buildLoginButton(context),
-                  TextButton(
-                    onPressed: () {},
+                  _buildTextField(Icons.lock, "Mật khẩu", isPassword: true),
+                  SizedBox(height: 10),
+                  Align(
+                    alignment: Alignment.centerRight,
                     child: Text(
-                      'Quên mật khẩu?',
-                      style: TextStyle(color: Colors.white),
+                      "Quên mật khẩu?",
+                      style: TextStyle(color: Colors.grey),
                     ),
                   ),
+                  SizedBox(height: 20),
+                  _buildLoginButton(),
                 ],
               ),
             ),
@@ -57,39 +77,31 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTextField(IconData icon, String hintText, bool isPassword) {
+  Widget _buildTextField(IconData icon, String hint, {bool isPassword = false}) {
     return TextField(
       obscureText: isPassword,
-      style: TextStyle(color: Colors.white),
       decoration: InputDecoration(
         filled: true,
-        fillColor: Colors.white.withOpacity(0.2),
-        labelText: hintText,
-        labelStyle: TextStyle(color: Colors.white),
+        fillColor: Colors.grey.shade200,
+        hintText: hint,
+        prefixIcon: Icon(icon, color: Colors.grey),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
           borderSide: BorderSide.none,
         ),
-        prefixIcon: Icon(icon, color: Colors.white),
       ),
     );
   }
 
-  Widget _buildLoginButton(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        Navigator.pushReplacement(
-          context,
-          PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) => MainScreen(),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              return FadeTransition(opacity: animation, child: child);
-            },
-          ),
-        );
-      },
+  Widget _buildLoginButton() {
+  return Container(
+    width: double.infinity, // Để nút rộng hơn
+    height: 55, // Tăng chiều cao
+    margin: EdgeInsets.symmetric(horizontal: 20), // Thêm khoảng cách 2 bên
+    child: ElevatedButton(
+      onPressed: () {},
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(vertical: 14, horizontal: 60),
+        padding: EdgeInsets.symmetric(vertical: 16), // Tăng chiều cao của nút
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
@@ -97,17 +109,19 @@ class LoginScreen extends StatelessWidget {
       ),
       child: Ink(
         decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [Colors.blue, Colors.lightBlueAccent]),
+          gradient: LinearGradient(colors: [Color(0xFF8E2DE2), Color(0xFF4A00E0)]),
           borderRadius: BorderRadius.circular(30),
         ),
         child: Container(
           alignment: Alignment.center,
+          constraints: BoxConstraints(minWidth: 100, minHeight: 50), // Điều chỉnh kích thước
           child: Text(
-            'Đăng Nhập',
-            style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+            'Đăng nhập',
+            style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }
