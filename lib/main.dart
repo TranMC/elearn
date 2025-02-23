@@ -12,6 +12,8 @@ void main() {
 }
 
 class ElearningApp extends StatelessWidget {
+  const ElearningApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

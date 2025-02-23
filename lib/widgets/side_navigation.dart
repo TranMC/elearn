@@ -4,7 +4,7 @@ import '../screens/login_screen.dart';
 class SideNavigation extends StatelessWidget {
   final Function(int) onSelect;
 
-  const SideNavigation({required this.onSelect, Key? key}) : super(key: key);
+  const SideNavigation({required this.onSelect, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,8 @@ class SideNavigation extends StatelessWidget {
               children: [
                 _buildDrawerItem(Icons.home, "Trang chủ", 0, context),
                 _buildDrawerItem(Icons.person, "Hồ sơ", 1, context),
-                _buildDrawerItem(Icons.settings, "Cài đặt", 2, context),
+                _buildDrawerItem(Icons.class_, "Khoá học", 2, context),
+                _buildDrawerItem(Icons.settings, "Cài đặt", 4, context),
                 Divider(),
                 _buildDrawerItem(Icons.info, "Về chúng tôi", 3, context),
                 _buildDrawerItem(

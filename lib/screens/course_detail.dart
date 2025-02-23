@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '';
+
 
 
 class CourseDetailScreen extends StatelessWidget {
   final Map<String, String> course;
   
-  CourseDetailScreen({required this.course});
+  const CourseDetailScreen({super.key, required this.course});
 
   @override
   Widget build(BuildContext context) {

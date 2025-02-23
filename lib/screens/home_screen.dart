@@ -4,6 +4,8 @@ import '../screens/profile_screen.dart'; // Import ProfileScreen
 import '../screens/settings_screen.dart'; // Import SettingsScreen
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -76,9 +78,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
 // Nội dung chính của trang Home
 class HomeContent extends StatelessWidget {
+  @override
   final Key? key;
 
-  HomeContent({this.key}) : super(key: key);
+  const HomeContent({this.key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     print(
@@ -188,7 +191,7 @@ class HomeContent extends StatelessWidget {
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
-        Container(
+        SizedBox(
           height: 150,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
