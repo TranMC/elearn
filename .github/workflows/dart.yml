@@ -15,10 +15,19 @@ jobs:
       with:
         sdk: stable
 
+    - The failure occurred because the `flutter` command was not found. This suggests that Flutter is not installed or not available in the PATH.
+
+To fix this, you need to ensure that Flutter is installed and available in the PATH. You can add the following step in your workflow file `.github/workflows/dart.yml` to install Flutter before running `flutter pub get`:
+
+
     - name: Install Flutter
       run: |
         git clone https://github.com/flutter/flutter.git -b stable --depth 1
         echo "$PWD/flutter/bin" >> $GITHUB_PATH
+        flutter doctor
+
+
+Ensure this step is added before the `flutter pub get` step. This will install Flutter and make the command available.
 
     - name: Flutter Pub Get
       run: flutter pub get
