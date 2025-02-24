@@ -21,8 +21,8 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.16.9' # Sử dụng phiên bản Flutter ổn định bạn cần (cập nhật theo nhu cầu)
-          channel: 'stable' # Hoặc 'beta', 'dev' tùy theo nhu cầu
+          flutter-version: '3.29.0' # Cập nhật phiên bản Flutter để sử dụng Dart 3.7.0
+          channel: 'stable' # Sử dụng channel stable để đảm bảo ổn định
 
       - name: Check Flutter version
         run: flutter --version
