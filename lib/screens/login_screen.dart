@@ -96,41 +96,34 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildLoginButton(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 55,
-      margin: EdgeInsets.symmetric(horizontal: 20),
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.pushReplacement(
-            
-            context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
-          );
-        },
-        style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.symmetric(vertical: 16),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-          elevation: 0,
-        ),
-        child: Ink(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [Color(0xFF8E2DE2), Color(0xFF4A00E0)]),
-            borderRadius: BorderRadius.circular(30),
-          ),
-          child: Container(
-            alignment: Alignment.center,
-            constraints: BoxConstraints(minWidth: 100, minHeight: 50),
-            child: Text(
-              'Đăng nhập',
-              style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
+Widget _buildLoginButton(BuildContext context) {
+  return Container(
+    width: double.infinity,
+    height: 55,
+    margin: EdgeInsets.symmetric(horizontal: 20),
+    decoration: BoxDecoration(
+      gradient: LinearGradient(colors: [Color(0xFF8E2DE2), Color(0xFF4A00E0)]),
+      borderRadius: BorderRadius.circular(30),
+    ),
+    child: ElevatedButton(
+      onPressed: () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+        );
+      },
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.symmetric(vertical: 16),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        backgroundColor: Colors.transparent, // Không cần thiết, có thể bỏ
+        shadowColor: Colors.transparent, 
+        elevation: 0,
       ),
-    );
-  }
+      child: Text(
+        'Đăng nhập',
+        style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+      ),
+    ),
+  );
+}
 }

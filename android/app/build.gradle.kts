@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.test.elearning_app"
+    namespace = "com.test.elearn"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "27.0.12077973"
 
@@ -19,7 +19,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.elearning_app"
+        applicationId = "com.test.elearn"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
