@@ -138,12 +138,10 @@ class HomeContent extends StatelessWidget {
       ),
       child: TextField(
         decoration: InputDecoration(
-          icon: Icon(Icons.search, color: Theme.of(context).iconTheme.color ?? Colors.grey),
+          icon: Icon(Icons.search, color: Theme.of(context).iconTheme.color),
           hintText: "Tìm kiếm khóa học...",
           hintStyle: TextStyle(
-            color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.white70 // Gợi ý xám nhạt trong dark mode
-                : Theme.of(context).textTheme.bodyMedium?.color ?? Colors.black54,
+            color: Theme.of(context).textTheme.bodyMedium?.color,
           ),
           border: InputBorder.none,
         ),
